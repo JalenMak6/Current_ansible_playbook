@@ -1,0 +1,13 @@
+---
+ - name: install packages for ubuntu
+   package:
+     name: "{{ item }}"
+     state: absent
+   loop:
+     - nginx
+     - git
+     - net-tools
+     - vim
+     - docker
+     - telegraf
+     - python3
