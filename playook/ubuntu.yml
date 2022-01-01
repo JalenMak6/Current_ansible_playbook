@@ -1,0 +1,10 @@
+---
+ - name: target for ubuntu server
+   hosts: test
+   gather_facts: yes
+   become: true
+   ignore_errors: true
+   tasks:
+     - name: run the tasks yml file
+       import_tasks: /etc/ansible/tasks/packages.yml
+

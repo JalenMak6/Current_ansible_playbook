@@ -1,0 +1,36 @@
+---
+ - name: learn template
+   hosts: test
+   gather_facts: true
+   become: true
+   tasks:
+     - name: install apache2
+       apt:
+         name: apache2
+         state: present
+
+     - name: install curl packages
+       apt:
+         name: curl
+         state: present
+
+     - name: see the content of the website
+       command: curl -I 192.168.1.11
+       register: content
+
+     - debug: var=content.stdout.splitlines()
+
+     - name: use template module to send the updated index.html file to the apache2 default webpage
+       template:
+          src: /etc/ansible/templates/index.html.j2
+          dest: /var/www/html/index.html
+
+     - name: reload apache2
+       service:
+         name: apache2
+         state: reloaded
+
+     - command: curl 192.168.1.11
+       register: content_new
+
+     - debug: var=content_new.stdout

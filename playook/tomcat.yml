@@ -1,0 +1,23 @@
+--- 
+ - name: install and configure tomcat
+   hosts: test
+   gather_facts: false
+   tasks:
+     - name: install python
+       apt:
+         name: python3
+         state: present
+
+     - name: update repos
+       apt:
+         update_cache: yes
+    
+     - name: upgrade all the packages on server
+       apt:
+         name: '*'
+         state: latest
+
+     - name: install requied java
+       apt:
+         name: default-jre
+         state: present
