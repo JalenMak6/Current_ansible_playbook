@@ -1,0 +1,45 @@
+---
+# tasks file for ubuntu
+ - name: install initial packages needed in Ubuntu
+   package:
+     name: "{{ item }}"
+     state: latest
+   vars:
+     my_port: 80
+
+   loop:
+     - nginx
+     - git
+     - wget
+     - curl
+     - net-tools
+     - vim
+     - python3
+
+ - name: set timezone to America/Vancouver
+   shell: timedatectl set-timezone "America/Vancouver"
+
+ - name: use template to import index.html
+   template:
+     src: ../templates/index.html.j2
+     dest: /var/www/html/index.html
+  
+   notify:
+     - reload nginx
+
+ - name: curl the node
+   uri:
+     url: http://{{ inventory_hostname }}
+     return_content: yes
+   register: info
+           #   command: curl {{ inventory_hostname }}
+           # register: info
+
+ - name: get the default page info
+   debug: var=info
+
+ - name: include telegraf installation
+   include_tasks: new_telegraf.yml
+
+ - name: include docker.yml
+   include_tasks: docker.yml

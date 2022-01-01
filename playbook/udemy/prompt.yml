@@ -1,0 +1,12 @@
+---
+ - name: test var_prompts
+   hosts: localhost
+   vars_prompt:
+     - name: username
+       prompt: "What is your name?"
+       private: no
+     - name: password
+       prompt: "Enter your password"
+   tasks:
+     - debug:
+         msg: "{{username}} {{password}}"

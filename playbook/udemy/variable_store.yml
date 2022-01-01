@@ -1,0 +1,12 @@
+---
+ x: 4
+ y: 8
+ a:
+  - 'Jalen'
+  - 'Mak'
+  - 1234
+  - 1982
+  - 'Password'
+ pkgs:
+   "linux": "httpd"
+   "ubuntu": "apache"

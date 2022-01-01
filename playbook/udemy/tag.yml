@@ -1,0 +1,28 @@
+---
+ - name: practise tag
+   hosts: localhost
+   gather_facts: false
+   tasks:
+     - debug:
+         msg: "This is the first"
+       tags: 
+         - first
+         - never
+     - debug:
+         msg: "This is the second"
+       tags: 
+         - second
+         - always
+     - debug:
+         msg: "This is the third"
+       tags: 
+         - third
+         - never
+     - debug:
+         msg: "This is 4th"
+       tags: fourth
+     - debug:
+         msg: "This is 5th"
+       tags: 
+         - fifth 
+         - common

@@ -1,0 +1,14 @@
+---
+ - name: install many packages
+   hosts: localhost
+   gather_facts: false
+   tasks:
+     - name: isntall my stuff
+       yum:
+         name: "{{ item }}"
+         state: present
+       
+       loop:
+         - httpd
+         - git
+         - docker

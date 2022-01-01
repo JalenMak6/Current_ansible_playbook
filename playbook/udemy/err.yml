@@ -1,0 +1,12 @@
+---
+ - name: practise ignore_errors
+   hosts: localhost
+   gather_facts: false
+   tasks:
+     - command: "ls /root"
+       register: output
+       ignore_errors: yes
+     - debug: var=output
+     - command: "ls /var/log"
+       register: log
+     - debug: var=log

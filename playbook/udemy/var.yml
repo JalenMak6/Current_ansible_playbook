@@ -1,0 +1,25 @@
+---
+ - name: testing var
+   hosts: localhost
+   vars:
+     x: 23
+     my_name: "Jalen"
+     pakgs: 
+       - 'vim'
+       - 'nano'
+       - 'httpd'
+       - 'wget'
+       - 'git' 
+     website: {'Linux': 'httpd', 'Ubuntu': 'apache2'}
+   gather_facts: false
+   tasks:
+     - debug: 
+         msg:
+           - "My name is {{my_name}} and type: {{my_name|type_debug}}"
+           - "The value of x is {{x}} and type: {{x|type_debug}}"
+
+     - debug:
+         #var=pakgs[2]
+         var=website.items()
+         #var=website.get('Linux')
+    

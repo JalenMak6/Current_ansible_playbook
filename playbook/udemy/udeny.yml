@@ -1,0 +1,66 @@
+---
+ - name: Ansible playbook for Ansible-practise nodes
+   hosts: ansible_practise
+   gather_facts: yes
+   become: true
+   tasks:
+
+   - name: Debug message
+     debug: 
+       msg: 
+        - "Welcome to Ansbile"
+        - "Learning ansible"
+
+   - name: Debug with var
+     debug:
+       msg: 
+         - "The hostname is {{ inventory_hostname }}"
+         - "The distribution is {{ansible_distribution}}"
+
+   - name: copy file to nodes
+     copy: 
+       src: /root/make
+       dest: /root/make
+   
+   - name: create files to nodes
+     file:
+       path: /root/file.txt
+       state: touch
+
+   - name: install wget
+     yum:
+       name: wget
+       state: latest
+     when: ansible_distribution == 'CentOS'
+   
+   - name: Install wget
+     apt:  
+       name: wget
+       state: present
+     when: ansible_distribution == 'Ubuntu'
+
+   - name: Install git
+     yum:
+       name: git
+       state: present
+     when: ansible_distribution == 'CentOS'
+   
+   - name: Install git
+     apt:
+       name: git
+       state: present
+     when: ansible_distribution == 'Ubuntu'
+
+   #- name: Set vim to be the first edirot by editing .bashrc
+     #ansible.builtin.shell: echo "alias vi='vim'" >> /root/.bashrc         
+ 
+   - name: install nano, httpd on Centos
+     yum:
+       name: nano
+       state: present
+     yum:
+       name: httpd
+       state: latest
+     when: ansible_distribution == 'CentOS'
+
+ 

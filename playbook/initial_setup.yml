@@ -1,0 +1,9 @@
+---
+ - name: try to use ansible role
+   hosts: test
+   gather_facts: true
+   become: true
+   vars:
+           my_port: 80
+   roles:
+     - ubuntu

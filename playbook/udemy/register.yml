@@ -1,0 +1,13 @@
+---
+ - name: try to use register
+   hosts: localhost
+   tasks:
+     - name: Go register
+       shell: "bash --version"
+       register: bash_ver
+     - set_fact:
+         bash_version: "{{bash_ver.stdout.split('\n')[0].split()[3]}}"
+         my_value: "Bash_version"
+    # - debug: var=bash_ver.stdout.split('\n')[0].split()[3]
+     - debug:
+         var=bash_version
