@@ -1,0 +1,33 @@
+---
+ - name: deploy docker-compose to create nextcloud container
+   hosts: 192.168.1.3
+   vars:
+     ansible_python_interpreter: /usr/bin/python3
+   become: true
+   tasks:
+     - name: copy docker-compose to remote node
+       copy:
+         src: /etc/ansible/templates/nextcloud.yml
+         dest: /root/docker-compose.yml
+
+     - name: install docker-related packages on remote node
+       apt: 
+         name: "{{ item }}"
+         state: present
+       loop:
+         - python3-pip
+     
+     - name: install docker-py
+       pip:
+         name: " {{ item }}"
+         state: present
+       loop:
+         - docker<5
+         - websocket-client<1
+         - docker-compose
+
+     - name: deploy docker-compose to remote node
+       docker_compose:
+         project_src: /root
+         files:
+           - docker-compose.yml
