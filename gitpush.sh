@@ -3,5 +3,5 @@
 git pull origin master
 git init
 git add .
-git commit -m 'Latest update for ansible-setup'
+git commit -m '$1'
 git push -u origin master
