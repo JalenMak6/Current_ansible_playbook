@@ -1,6 +1,6 @@
 ---
  - name: deploy docker-compose to create nextcloud container
-   hosts: 192.168.1.3
+   hosts: your_host
    vars:
      ansible_python_interpreter: /usr/bin/python3
    become: true
