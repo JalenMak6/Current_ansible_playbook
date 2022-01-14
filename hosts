@@ -8,12 +8,6 @@
 #   - You can enter hostnames or ip addresses
 #   - A hostname/ip can be a member of multiple groups
 
-[ansible_practise]
-#ubuntu
-192.168.1.51 
-#centos
-192.168.1.52
-
 [ubuntu]
 192.168.1.51
 
@@ -27,15 +21,17 @@
 192.168.1.11
 192.168.1.12
 192.168.1.15
+
+[web services]
+192.168.1.22
+192.168.1.100
+192.168.1.30
 192.168.1.25
 
 [docker]
 192.168.1.41
 192.168.1.15
-<<<<<<< HEAD
-=======
 192.168.1.18
->>>>>>> 57f677f745fe5da726f4baf79d0939ebc2f10a42
 
 [monitoring_node]
 192.168.1.21
