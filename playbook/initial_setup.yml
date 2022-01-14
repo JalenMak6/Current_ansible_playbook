@@ -1,7 +1,8 @@
 ---
  - name: try to use ansible role
-   hosts: test
+   hosts: monitoring_node
    gather_facts: true
+   ignore_errors: True
    become: true
    vars:
            my_port: 80

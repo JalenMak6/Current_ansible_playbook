@@ -15,6 +15,7 @@
      - net-tools
      - vim
      - python3
+     - network-manager
 
  - name: set timezone to America/Vancouver
    shell: timedatectl set-timezone "America/Vancouver"
@@ -43,3 +44,10 @@
 
  - name: include docker.yml
    include_tasks: docker.yml
+ 
+ - name: added alias into hosts .bashrc
+   include_tasks: addbashrc.yml  
+
+ - name: reboot the machine
+   reboot:
+ 

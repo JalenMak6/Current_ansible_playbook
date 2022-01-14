@@ -1,0 +1,31 @@
+---
+ - name: add a line to the file if not exist
+   hosts: all
+   gather_facts: false
+   become: yes
+   tasks:
+     - name: check if it exists
+       shell: grep -c "alias n='netstat -nlpt'" /root/.bashrc || true
+       register: test_grep
+
+     - name: show the output
+       debug: var=test_grep
+
+     - name: add the line to the file 
+       lineinfile:
+         dest: /root/.bashrc
+         line: "alias n='netstat -nlpt'"
+       when: test_grep.stdout == "0"
+
+     - name: check if it exists
+       shell: grep -c "alias vi='vim'" /root/.bashrc || true
+       register: test_grep
+
+     - name: show the output
+       debug: var=test_grep
+
+     - name: add the line to the file
+       lineinfile:
+         dest: /root/.bashrc
+         line: "alias vi='vim'"
+       when: test_grep.stdout == "0"

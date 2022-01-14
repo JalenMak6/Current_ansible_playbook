@@ -1,0 +1,31 @@
+---
+ - name: test command
+   hosts: localhost
+   gather_facts: false
+   become: true
+   tasks:
+     - name: check if jalen is defined in the file
+       lineinfile:
+          state: absent
+          path: "/root/.bashrc"
+          regexp: "^alias i="
+       check_mode: true
+       changed_when: false
+       register: check_result
+    
+     - name: show the check result
+       debug:
+         msg:
+           "{{ check_result }}"
+
+     - name: define jalen if it is not defined
+       lineinfile:
+         state: present
+         path: "/root/.bashrc"
+         line: "{{ item }} "
+       with_items:
+         - "alias i='ip a'"
+         - "alias c='cd /va/log'"
+         - "alias p='ping"
+       when: check_result.found == 0
+       

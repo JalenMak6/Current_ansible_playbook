@@ -1,0 +1,31 @@
+---
+ - name: test command
+   hosts: proxy_server
+   gather_facts: false
+   become: true
+   tasks:
+     - name: check if jalen is defined in the file
+       lineinfile:
+          state: absent
+          path: "/root/.bashrc"
+          regexp: "^alias c="
+       check_mode: true
+       changed_when: false
+       register: check_result
+    
+     - name: show the check result
+       debug:
+         msg:
+           "{{ check_result }}"
+
+     - name: define jalen if it is not defined
+       blockinfile:
+         state: present
+         path: "/root/.bashrc"
+         block: |
+          alias vi=vim'
+          alias n='netstat -nlpt'
+          alias i='ip a'
+          alias c='cd /va/log'
+       when: check_result.found == 0
+       
