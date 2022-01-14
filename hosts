@@ -8,9 +8,6 @@
 #   - You can enter hostnames or ip addresses
 #   - A hostname/ip can be a member of multiple groups
 
-[ubuntu]
-192.168.1.51
-
 [centos]
 192.168.1.52
 
