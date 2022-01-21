@@ -1,6 +1,6 @@
 ---
  - name: try to use ansible role
-   hosts: monitoring_node
+   hosts: development
    gather_facts: true
    ignore_errors: True
    become: true

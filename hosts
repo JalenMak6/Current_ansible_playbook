@@ -8,11 +8,14 @@
 #   - You can enter hostnames or ip addresses
 #   - A hostname/ip can be a member of multiple groups
 
-[centos]
-192.168.1.52
+[development]
+192.168.1.150
 
-[practise]
-192.168.1.38
+[music_stream]
+192.168.1.90
+
+[lnmp]
+192.168.1.7
 
 [test]
 192.168.1.11
@@ -40,9 +43,6 @@
 [proxy_server]
 192.168.1.100
 
-[member:children]
-monitoring_node
-test_node
 
 
 # Ex 1: Ungrouped hosts, specify before any group headers.

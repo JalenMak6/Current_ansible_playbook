@@ -1,0 +1,42 @@
+---
+ - name: Install Navidrome in docker
+   hosts: development
+   gather_facts: no
+   become: true
+   tasks:
+     - name: create a directory for navidrome
+       file:
+         path: /root/navidrome
+         owner: root
+         group: root
+         state: directory 
+
+     - name: copy docker-compose.yml
+       copy:
+         src: /etc/ansible/docker-compose-deploy-site/navidrome/docker-compose.yml
+         dest: /root/navidrome/docker-compose.yml
+    
+     - name: install pip
+       package:
+         name:
+           - pip
+
+     - name: install python dependenies
+       pip:
+         name: 
+           - docker
+           - docker-compose
+           - requests
+
+     - name: run the docker-compose.yml
+       docker_compose:
+         project_src: /root/navidrome
+         files:
+         - docker-compose.yml
+         recreate: smart
+       register: check
+
+     - name: check Status
+       debug:
+         var: check.services
+
