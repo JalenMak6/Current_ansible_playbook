@@ -1,42 +1,40 @@
 ---
- - name: Install Navidrome in docker
+ - name: Install node_exporter to all hosts
    hosts: all
    gather_facts: no
    become: true
    tasks:
-     - name: create a directory for navidrome
+     - name: Make directory on the remote host
        file:
-         path: /root/navidrome
+         path: /root/node_exporter
          owner: root
          group: root
-         state: directory 
+         state: directory
 
-     - name: copy docker-compose.yml
+     - name: Copy docker-compose.yml to remote directory
        copy:
-         src: /etc/ansible/docker-compose-deploy-site/navidrome/docker-compose.yml
-         dest: /root/navidrome/docker-compose.yml
-    
+         src: /etc/ansible/templates/node_exporter.yml
+         dest: /root/node_exporter/docker-compose.yml
+
      - name: install pip
        package:
          name:
            - pip
-
+      
      - name: install python dependenies
        pip:
-         name: 
+         name:
            - docker
            - docker-compose
-           - requests
 
-     - name: run the docker-compose.yml
+     - name: Deploy docker-compose file
        docker_compose:
-         project_src: /root/navidrome
+         project_src: /root/node_exporter
          files:
          - docker-compose.yml
          recreate: smart
        register: check
 
-     - name: check Status
+     - name: check the status
        debug:
          var: check.services
-

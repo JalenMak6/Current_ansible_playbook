@@ -1,0 +1,7 @@
+---
+ - name: Particular to prometheuse host
+   hosts: all
+   gather_facts: true
+   ignore_errors: true
+   become: yes
+   roles: prometheus

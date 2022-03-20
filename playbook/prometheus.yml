@@ -1,0 +1,45 @@
+- name: Install Prometheus+Grafana+node_exporter+cAdvisor
+  hosts: all
+  become: true 
+  gather_facts: no
+  tasks:
+     - name: create directory for prometheus
+       file:
+         path: /root/prometheus
+         owner: root
+         group: root
+         state: directory
+
+     - name: copy prometheus docker-compose.yml
+       copy:
+         src: /etc/ansible/templates/prometheus.yml
+         dest: /root/prometheus/docker-compose.yml
+
+     - name: copy prometheus configuration file to reomte host
+       copy:
+         src: /etc/ansible/templates/prometheus/prometheus.yml
+         dest: /root/prometheus/prometheus.yml
+     
+     - name: install pip 
+       package:
+         name: 
+          - pip
+     
+     - name: install python dependenies
+       pip:
+         name:
+           - docker
+           - docker-compose
+           - requests
+
+     - name: run the docker-compose.yml
+       docker_compose:
+         project_src: /root/prometheus
+         files:
+         - docker-compose.yml
+         recreate: smart
+       register: check
+
+     - name: check Status
+       debug:
+         var: check.services

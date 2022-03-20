@@ -8,35 +8,44 @@
 #   - You can enter hostnames or ip addresses
 #   - A hostname/ip can be a member of multiple groups
 
+[containers]
+192.168.1.110
+192.168.1.210
+192.168.1.90
+192.168.1.25
+192.168.1.100
+
+[rocketchat]
+192.168.1.7
+
+[dockerhost]
+192.168.1.210
+
+[prometheus]
+192.168.1.181
+
 [development]
 192.168.1.150
 
 [music_stream]
 192.168.1.90
 
-[lnmp]
+[adguard]
+192.168.1.110
+
+[RocketChat]
 192.168.1.7
 
-[test]
-192.168.1.11
-192.168.1.12
-192.168.1.15
-
 [web_services]
-192.168.1.22
 192.168.1.100
-192.168.1.30
 192.168.1.25
+
 
 [docker]
 192.168.1.41
-192.168.1.15
-192.168.1.18
+
 
 [monitoring_node]
-192.168.1.21
-192.168.1.22
-192.168.1.23
 192.168.1.41
 192.168.1.50
 

@@ -19,12 +19,6 @@
 
  - name: set timezone to America/Vancouver
    shell: timedatectl set-timezone "America/Vancouver"
-
- - name: use template to import index.html
-   template:
-     src: ../templates/index.html.j2
-     dest: /var/www/html/index.html
-  
    notify:
      - reload nginx
 

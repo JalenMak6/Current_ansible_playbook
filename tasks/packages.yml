@@ -11,3 +11,6 @@
      - docker
      - telegraf
      - python3
+     - wget
+     - zip
+     - gzip
