@@ -12,3 +12,7 @@ The current setup is for all newly ubuntu server to have certian settings and in
 6. Create Alias to .bashrc for my daily command
 7. Reboot
 8. Depends on what applicatons needed, will run playbooks for it.
+
+#update Mar 20
+There are new playbooks for prometheus, grafana, node_Exporter, Cadvisor containers deployment
+
